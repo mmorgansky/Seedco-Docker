@@ -7,13 +7,15 @@ services:
       - "8009:8009"
     volumes:
       - ./app/Deploy/crmeb.ear:/opt/jboss/server/default/deploy/crmeb.ear
-      # todo: look into instaling jasperreports via dockerfile instead of compose, need to make sure proper version is used
-      - ./.docker/jasperreports-server-cp-5.6.1-bin:/opt/jasperreports-server-cp-5.6.1-bin
       - ./app/Deploy/crmeb-ds.xml:/opt/jboss/server/default/deploy/crmeb-ds.xml
-      - ./.docker/run/profile.xml:/opt/jboss/server/default/conf/bootstrap/profile.xml
-      - ./.docker/run/js-jboss-ds.xml:/opt/jboss/server/default/deploy/js-jboss-ds.xml  
       - ./app/lib/jasperserver-api-common-5.6.1.jar:/opt/jboss/server/default/lib/jasperserver-api-common-5.6.1.jar
       - ./app/lib/postgresql-9.3-1101-jdbc4.jar:/opt/jboss/server/default/lib/postgresql-9.3-1101-jdbc4.jar
+      # todo: look into instaling jasperreports via dockerfile instead of compose, need to make sure proper version is used
+      - ./.docker/jasperreports-server-cp-5.6.1-bin:/opt/jasperreports-server-cp-5.6.1-bin
+      - ./.docker/run/jboss-log4j.xml:/opt/jboss/server/default/conf/jboss-log4j.xml
+      - ./.docker/run/profile.xml:/opt/jboss/server/default/conf/bootstrap/profile.xml
+      - ./.docker/run/js-jboss-ds.xml:/opt/jboss/server/default/deploy/js-jboss-ds.xml  
+   
     depends_on:
       - db
     privileged: true
